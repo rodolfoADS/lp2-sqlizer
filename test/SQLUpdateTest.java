@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.Date;
+import java.util.Calendar;
+
 import org.junit.Test;
 
 
@@ -35,6 +38,35 @@ public class SQLUpdateTest {
 				.toString();
 		
 		assertEquals("UPDATE table SET field=1, fieldA=2;", sql);
+	}
+	
+	@Test
+	public void updateSetSetDouble() {
+		String sql = SQlizer
+				.update("table")
+				.set("field", 1.55)
+				.set("fieldA", 2.12345)
+				.toString();
+		
+		assertEquals("UPDATE table SET field=1.55, fieldA=2.12345;", sql);
+	}
+	
+	@Test
+	public void updateSetSetDate() {
+		Date dataA, dataB;
+		Calendar c = Calendar.getInstance();
+		c.set(2015, Calendar.SEPTEMBER, 1, 12, 0, 0);
+		dataA = c.getTime();
+		c.set(2015, Calendar.DECEMBER, 10, 15, 30, 0);
+		dataB = c.getTime();
+		
+		String sql = SQlizer
+				.update("table")
+				.set("field", dataA)
+				.set("fieldA", dataB)
+				.toString();
+		
+		assertEquals("UPDATE table SET field=\"2015-09-01 12:00:00\", fieldA=\"2015-12-10 15:30:00\";", sql);
 	}
 	
 	@Test
