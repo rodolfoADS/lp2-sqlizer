@@ -1,9 +1,11 @@
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class SQLInsert {
 
 	private String into;
-	private String fields;
-	private String values;
+	private QuerySetter querySet = new QuerySetter();
 	
 	public SQLInsert into(String table) {
 		this.into = table;
@@ -12,35 +14,31 @@ public class SQLInsert {
 	}
 
 	public SQLInsert set(String field, String value) {
-		if (this.fields == null) {
-			this.fields = field;
-			this.values = "\"" + value + "\"";
-		} else {
-			this.fields += ", " + field;
-			this.values += ", \"" + value + "\"";
-		}
-		
+		querySet.set(field, value);
 		return this;
 	}
 	
 	public SQLInsert set(String field, int value) {
-		if (this.fields == null) {
-			this.fields = field;
-			this.values = String.valueOf(value);
-		} else {
-			this.fields += ", " + field;
-			this.values += ", " + String.valueOf(value) + "";
-		}
-		
+		querySet.set(field, value);
+		return this;
+	}
+	
+	public SQLInsert set(String field, double value) {
+		querySet.set(field, value);
+		return this;
+	}
+	
+	public SQLInsert set(String field, Date value) {
+		querySet.set(field, value);
 		return this;
 	}
 	
 	@Override
 	public String toString() {
-		if (into == null || fields == null)
+		if (into == null || querySet.size() == 0)
 			throw new IncompleteQueryException("A consulta SQLInsert deve especificar a tabela de destino e ao menos 1 campo");
 		
-		String sql = "INSERT INTO " + into + " (" + fields + ")" + " VALUES (" + values + ")"; 
+		String sql = "INSERT INTO " + into + " " + querySet.getFieldValuesSql(); 
 		
 		return sql + ";";
 	}
