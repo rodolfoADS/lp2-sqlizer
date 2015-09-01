@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class SQLUpdate {
 
@@ -45,6 +49,31 @@ public class SQLUpdate {
 		
 		return this;
 	}
+	
+	public SQLUpdate set(String field, double value) {
+		String setValue = field + "=" + String.valueOf(value);
+		
+		if (this.set == null) {
+			this.set = setValue;
+		} else {
+			this.set += ", " + setValue;
+		}
+		
+		return this;
+	}
+	
+	public SQLUpdate set(String field, Date value) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String setValue = field + "=\"" + sdf.format(value) + "\"";
+		
+		if (this.set == null) {
+			this.set = setValue;
+		} else {
+			this.set += ", " + setValue;
+		}
+		
+		return this;
+	}
 
 	public SQLUpdate where(String field, String value) {
 		this.where = field + "=\"" + value + "\"";
@@ -60,6 +89,5 @@ public class SQLUpdate {
 		
 		return this;
 	}
-	
-	
+
 }
