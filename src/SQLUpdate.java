@@ -6,72 +6,43 @@ import java.util.Date;
 public class SQLUpdate {
 
 	private String table;
-	private String set;
+	private QuerySetter querySet = new QuerySetter();
 	private String where;
 	
 	public SQLUpdate(String table) {
 		this.table = table;
 	}
 
-	public SQLUpdate set(String field, String value) {
-		String setValue = field + "=\"" + value + "\"";
-		
-		if (this.set == null) {
-			this.set = setValue;
-		} else {
-			this.set += ", " + setValue;
-		}
-		
-		return this;
-	}
-	
 	@Override
 	public String toString() {
-		if (set == null)
+		if (querySet.size() == 0)
 			throw new IncompleteQueryException("Sua consulta UPDATE deve definir o valor de ao menos 1 campo.");
 		
-		String sql = "UPDATE " + this.table + " SET " + this.set;
+		String sql = "UPDATE " + this.table + " " + this.querySet.getSetSql();
 		
 		if (this.where != null)
 			sql += " WHERE " + this.where;
 		
 		return sql + ";";
 	}
+	
+	public SQLUpdate set(String field, String value) {
+		querySet.set(field, value);
+		return this;
+	}
 
 	public SQLUpdate set(String field, int value) {
-		String setValue = field + "=" + String.valueOf(value);
-		
-		if (this.set == null) {
-			this.set = setValue;
-		} else {
-			this.set += ", " + setValue;
-		}
-		
+		querySet.set(field, value);
 		return this;
 	}
 	
 	public SQLUpdate set(String field, double value) {
-		String setValue = field + "=" + String.valueOf(value);
-		
-		if (this.set == null) {
-			this.set = setValue;
-		} else {
-			this.set += ", " + setValue;
-		}
-		
+		querySet.set(field, value);
 		return this;
 	}
 	
 	public SQLUpdate set(String field, Date value) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String setValue = field + "=\"" + sdf.format(value) + "\"";
-		
-		if (this.set == null) {
-			this.set = setValue;
-		} else {
-			this.set += ", " + setValue;
-		}
-		
+		querySet.set(field, value);
 		return this;
 	}
 
