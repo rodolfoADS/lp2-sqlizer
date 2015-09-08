@@ -1,13 +1,12 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 
 public class QuerySetter {
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private HashMap<String, String> fields = new HashMap<String, String>();
+	private LinkedHashMap<String, String> fields = new LinkedHashMap<String, String>();
 
 	public void set(String field, String value) {
 		this.setQuoted(field, value);
