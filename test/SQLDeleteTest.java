@@ -38,6 +38,18 @@ public class SQLDeleteTest {
 	}
 	
 	@Test
+	public void deleteFromWhereOrWhere() {
+		String sql = SQlizer
+				.delete()
+				.from("table")
+				.where("field = 1")
+				.orWhere("otherField = 2")
+				.toString();
+		
+		assertEquals("DELETE FROM table WHERE field = 1 OR otherField = 2;", sql);
+	}
+	
+	@Test
 	public void deleteFromAndWhereDeveLancarExcecao() {
 		try {
 			SQlizer

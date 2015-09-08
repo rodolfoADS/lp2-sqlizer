@@ -33,4 +33,10 @@ public class SQLDelete {
 		
 		return this;
 	}
+
+	public SQLDelete orWhere(String condition) {
+		this.conditions.orWhere(condition);
+		
+		return this;
+	}
 }

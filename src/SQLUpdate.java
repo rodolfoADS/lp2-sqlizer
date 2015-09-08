@@ -58,4 +58,10 @@ public class SQLUpdate {
 		return this;
 	}
 
+	public SQLUpdate orWhere(String condition) {
+		this.conditions.orWhere(condition);
+		
+		return this;
+	}
+
 }

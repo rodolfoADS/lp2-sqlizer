@@ -35,6 +35,18 @@ public class SQLSelectTest {
 	}
 	
 	@Test
+	public void selectFromWhereOrWhere() {
+		String sql = SQlizer
+				.select("*")
+				.from("table")
+				.where("field = 1")
+				.orWhere("otherField = 2")
+				.toString();
+		
+		assertEquals("SELECT * FROM table WHERE field = 1 OR otherField = 2;", sql);
+	}
+	
+	@Test
 	public void selectFromAndWhereDeveLancarExcecao() {
 		try {
 			SQlizer
@@ -45,6 +57,20 @@ public class SQLSelectTest {
 			fail();
 		} catch (IncompleteQueryException e) {
 			assertEquals("Você deve usar o método where() antes andWhere().", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void selectFromOrWhereDeveLancarExcecao() {
+		try {
+			SQlizer
+				.select("*")
+				.from("table")
+				.orWhere("otherField = 2")
+				.toString();
+			fail();
+		} catch (IncompleteQueryException e) {
+			assertEquals("Você deve usar o método where() antes de orWhere().", e.getMessage());
 		}
 	}
 	

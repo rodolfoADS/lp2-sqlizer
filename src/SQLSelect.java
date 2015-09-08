@@ -45,4 +45,9 @@ public class SQLSelect {
 		this.orderBy = orderBy;
 		return this;
 	}
+
+	public SQLSelect orWhere(String condition) {
+		this.conditions.orWhere(condition);		
+		return this;
+	}
 }

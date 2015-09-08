@@ -93,6 +93,18 @@ public class SQLUpdateTest {
 	}
 	
 	@Test
+	public void updateSetWhereOrWhere() {
+		String sql = SQlizer
+				.update("table")
+				.set("field", "value")
+				.where("fieldA=\"valueA\"")
+				.orWhere("fieldB=\"valueB\"")
+				.toString();
+		
+		assertEquals("UPDATE table SET field=\"value\" WHERE fieldA=\"valueA\" OR fieldB=\"valueB\";", sql);
+	}
+	
+	@Test
 	public void updateSetAndWhereDeveLancarExcecao() {
 		try {
 			SQlizer

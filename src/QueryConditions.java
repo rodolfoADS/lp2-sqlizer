@@ -20,4 +20,11 @@ public class QueryConditions {
 	public String getSql() {
 		return "WHERE " + condition;
 	}
+
+	public void orWhere(String condition) {
+		if (this.condition == null)
+			throw new IncompleteQueryException("Você deve usar o método where() antes de orWhere().");
+		
+		this.condition += " OR " + condition;
+	}
 }
