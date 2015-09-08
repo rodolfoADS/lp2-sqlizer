@@ -3,7 +3,7 @@ public class SQLSelect {
 	
 	private String fields;
 	private String from;
-	private String where;
+	private QueryConditions conditions = new QueryConditions();
 	private String orderBy;
 
 	public SQLSelect(String fields) {
@@ -22,8 +22,8 @@ public class SQLSelect {
 		
 		String sql  = "SELECT " + this.fields + " FROM " + this.from;
 		
-		if (where != null)
-			sql += " WHERE " + this.where;
+		if (!conditions.isEmpty())
+			sql += " " + this.conditions.getSql();
 		
 		if (orderBy != null)
 			sql += " ORDER BY " + this.orderBy;
@@ -32,17 +32,12 @@ public class SQLSelect {
 	}
 
 	public SQLSelect where(String condition) {
-		this.where = condition;
-		
+		this.conditions.where(condition);
 		return this;
 	}
 
 	public SQLSelect andWhere(String condition) {
-		if (this.where == null)
-			throw new IncompleteQueryException("Você deve usar o método where() antes andWhere().");
-		
-		this.where += " AND " + condition;
-		
+		this.conditions.andWhere(condition);		
 		return this;
 	}
 

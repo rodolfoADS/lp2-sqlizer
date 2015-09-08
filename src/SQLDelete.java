@@ -2,7 +2,7 @@
 public class SQLDelete {
 
 	private String from;
-	private String where;
+	private QueryConditions conditions = new QueryConditions();
 	
 	public SQLDelete from(String table) {
 		from = table;
@@ -16,23 +16,20 @@ public class SQLDelete {
 		
 		String sql = "DELETE FROM " + from;
 		
-		if (where != null)
-			sql += " WHERE " + where;
+		if (!conditions.isEmpty())
+			sql += " " + this.conditions.getSql();
 		
 		return sql + ";";
 	}
 
 	public SQLDelete where(String condition) {
-		this.where = condition;
+		this.conditions.where(condition);
 		
 		return this;
 	}
 	
 	public SQLDelete andWhere(String condition) {
-		if (this.where == null)
-			throw new IncompleteQueryException("Você deve usar o método where() antes andWhere().");
-		
-		this.where += " AND " + condition;
+		this.conditions.andWhere(condition);
 		
 		return this;
 	}

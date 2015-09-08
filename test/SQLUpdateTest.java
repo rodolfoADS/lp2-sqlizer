@@ -74,7 +74,7 @@ public class SQLUpdateTest {
 		String sql = SQlizer
 				.update("table")
 				.set("field", "value")
-				.where("field", "valueCondition")
+				.where("field=\"valueCondition\"")
 				.toString();
 		
 		assertEquals("UPDATE table SET field=\"value\" WHERE field=\"valueCondition\";", sql);
@@ -85,8 +85,8 @@ public class SQLUpdateTest {
 		String sql = SQlizer
 				.update("table")
 				.set("field", "value")
-				.where("fieldA", "valueA")
-				.andWhere("fieldB", "valueB")
+				.where("fieldA=\"valueA\"")
+				.andWhere("fieldB=\"valueB\"")
 				.toString();
 		
 		assertEquals("UPDATE table SET field=\"value\" WHERE fieldA=\"valueA\" AND fieldB=\"valueB\";", sql);
@@ -98,7 +98,7 @@ public class SQLUpdateTest {
 			SQlizer
 				.update("table")
 				.set("field", "value")
-				.andWhere("fieldB", "valueB")
+				.andWhere("fieldB=\"valueB\"")
 				.toString();
 			fail();
 		} catch (IncompleteQueryException e) {

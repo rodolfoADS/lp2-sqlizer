@@ -7,7 +7,7 @@ public class SQLUpdate {
 
 	private String table;
 	private QuerySetter querySet = new QuerySetter();
-	private String where;
+	private QueryConditions conditions = new QueryConditions();
 	
 	public SQLUpdate(String table) {
 		this.table = table;
@@ -20,8 +20,8 @@ public class SQLUpdate {
 		
 		String sql = "UPDATE " + this.table + " " + this.querySet.getSetSql();
 		
-		if (this.where != null)
-			sql += " WHERE " + this.where;
+		if (!this.conditions.isEmpty())
+			sql += " " + this.conditions.getSql();
 		
 		return sql + ";";
 	}
@@ -46,17 +46,14 @@ public class SQLUpdate {
 		return this;
 	}
 
-	public SQLUpdate where(String field, String value) {
-		this.where = field + "=\"" + value + "\"";
+	public SQLUpdate where(String condition) {
+		this.conditions.where(condition);
 		
 		return this;
 	}
 
-	public SQLUpdate andWhere(String field, String value) {
-		if (this.where == null)
-			throw new IncompleteQueryException("Você deve usar o método where() antes andWhere().");
-		
-		this.where += " AND " + field + "=\"" + value + "\"";
+	public SQLUpdate andWhere(String condition) {
+		this.conditions.andWhere(condition);
 		
 		return this;
 	}
