@@ -1,3 +1,9 @@
+package com.edupsousa.sqlizer;
+import com.edupsousa.sqlizer.sqlclauses.SQLDelete;
+import com.edupsousa.sqlizer.sqlclauses.SQLInsert;
+import com.edupsousa.sqlizer.sqlclauses.SQLSelect;
+import com.edupsousa.sqlizer.sqlclauses.SQLUpdate;
+
 
 public class SQlizer {
 

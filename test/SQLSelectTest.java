@@ -2,6 +2,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.edupsousa.sqlizer.SQlizer;
+import com.edupsousa.sqlizer.util.IncompleteQueryException;
+
 
 public class SQLSelectTest {
 

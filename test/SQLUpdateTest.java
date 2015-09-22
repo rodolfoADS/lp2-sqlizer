@@ -5,6 +5,9 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
+import com.edupsousa.sqlizer.SQlizer;
+import com.edupsousa.sqlizer.util.IncompleteQueryException;
+
 
 public class SQLUpdateTest {
 

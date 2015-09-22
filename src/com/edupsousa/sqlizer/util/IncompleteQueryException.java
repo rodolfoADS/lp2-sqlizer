@@ -1,3 +1,4 @@
+package com.edupsousa.sqlizer.util;
 
 public class IncompleteQueryException extends RuntimeException {
 

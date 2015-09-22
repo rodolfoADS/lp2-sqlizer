@@ -1,5 +1,9 @@
+package com.edupsousa.sqlizer.sqlclauses;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.edupsousa.sqlizer.util.IncompleteQueryException;
+import com.edupsousa.sqlizer.util.QuerySetter;
 
 
 public class SQLInsert {

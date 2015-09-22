@@ -1,6 +1,11 @@
+package com.edupsousa.sqlizer.sqlclauses;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.edupsousa.sqlizer.util.IncompleteQueryException;
+import com.edupsousa.sqlizer.util.QueryConditions;
+import com.edupsousa.sqlizer.util.QuerySetter;
 
 
 public class SQLUpdate {

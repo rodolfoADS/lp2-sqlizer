@@ -1,3 +1,7 @@
+package com.edupsousa.sqlizer.sqlclauses;
+import com.edupsousa.sqlizer.util.IncompleteQueryException;
+import com.edupsousa.sqlizer.util.QueryConditions;
+
 
 public class SQLDelete {
 

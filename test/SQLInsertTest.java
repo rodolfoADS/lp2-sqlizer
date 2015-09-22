@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
+import com.edupsousa.sqlizer.SQlizer;
+
 
 public class SQLInsertTest {
 
