@@ -23,7 +23,7 @@ public class SQLUpdate {
 		if (querySet.size() == 0)
 			throw new IncompleteQueryException("Sua consulta UPDATE deve definir o valor de ao menos 1 campo.");
 		
-		String sql = "UPDATE " + this.table + " " + this.querySet.getSetSql();
+		String sql = "UPDATE " + this.table + " " + this.querySet.getSql(1);
 		
 		if (!this.conditions.isEmpty())
 			sql += " " + this.conditions.getSql();

@@ -42,7 +42,8 @@ public class SQLInsert {
 		if (into == null || querySet.size() == 0)
 			throw new IncompleteQueryException("A consulta SQLInsert deve especificar a tabela de destino e ao menos 1 campo");
 		
-		String sql = "INSERT INTO " + into + " " + querySet.getFieldValuesSql(); 
+		
+		String sql = "INSERT INTO " + into + " " + querySet.getSql(2); 
 		
 		return sql + ";";
 	}

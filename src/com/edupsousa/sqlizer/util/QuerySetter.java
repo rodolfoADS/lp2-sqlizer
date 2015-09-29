@@ -37,40 +37,15 @@ public class QuerySetter {
 		fields.put(field, value);
 	}
 
-	public String getSetSql() {
-		String sql = "";
-		
-		for (String key : fields.keySet()) {
-			String value = fields.get(key);
-			if (sql.equals("")) {
-				sql = "SET " + key + "=" + value;
-			} else {
-				sql += ", " + key + "=" + value;
-			}
+	public String getSql(int mode){
+			if (mode == 1){
+				SetGeneration s = new SetGenerator();
+				return s.getSql(fields);
+			}else if (mode == 2){
+				SetGeneration s = new SetFieldsValuesGenerator();
+				return s.getSql(fields);
 		}
-		
-		return sql;
-	}
-
-	public String getFieldValuesSql() {
-		String sqlFields = "";
-		String sqlValues = "";
-		
-		for (String key : fields.keySet()) {
-			String value = fields.get(key);
-			if (sqlFields.equals("")) {
-				sqlFields += "(" + key;
-				sqlValues += " VALUES (" + value;
-			} else {
-				sqlFields += ", " + key;
-				sqlValues += ", " + value;
-			}
-		}
-		
-		sqlFields += ")";
-		sqlValues += ")";
-		
-		return sqlFields + sqlValues;
+			return "";
 	}
 	
 }
